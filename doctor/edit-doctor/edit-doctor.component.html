@@ -1,0 +1,174 @@
+<div class="main-wrapper">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <div class="page-wrapper">
+
+        <div class="content">
+            <div class="spinner-border text-primary" role="status" *ngIf="undefined === getData">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div *ngIf="undefined !== getData">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h4 class="page-title">Edit Doctor</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form class="form" [formGroup]="submitForm" (ngSubmit)="updateById(id, submitForm.value)">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Doctor Name<span class="text-danger">*</span></label>
+                                        <input type="text" formControlName="doctorName" class="form-control"
+                                            [ngClass]="{'is-invalid': isSubmitted && f.doctorName.errors }" />
+                                        <div *ngIf=" isSubmitted && f.doctorName.errors" class="invalid-feedback">
+                                            <div *ngIf="f.doctorName.errors.required">Doctor Number is required
+                                            </div>
+                                            <div *ngIf="f.doctorName.errors.pattern">Only alphabets is accepted</div>
+                                        </div>
+                                         <div  *ngIf="isSubmitted && is_space" class="red-text">
+                                            Space not allow
+                                         </div>  
+                                        <!-- <div class="red-text hidden" *ngIf="isSubmitted" id="val_id1">Empty field is
+                                            not allowed</div> -->
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Email<span class="text-danger">*</span></label>
+                                        <input type="text" formControlName="email" class="form-control"
+                                            onkeyup="this.value=this.value.replace(/^\s*|\$/g,'')"
+                                            [ngClass]="{'is-invalid': isSubmitted && f.email.errors }" />
+                                        <div *ngIf=" isSubmitted && f.email.errors" class="invalid-feedback">
+                                            <div *ngIf="f.email.errors.required">Email is required</div>
+                                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Contact Number</label>
+                                        <input type="text" formControlName="contactNumber" class="form-control"
+                                            [ngClass]="{'is-invalid': isSubmitted && f.contactNumber.errors }" />
+                                        <div *ngIf=" isSubmitted && f.contactNumber.errors" class="invalid-feedback">
+                                            <div *ngIf="f.contactNumber.errors.required">Contact Number is required
+                                            </div>
+                                            <div *ngIf="f.contactNumber.errors.minlength">Contact Number should have
+                                                minimun 10 numbers</div>
+                                            <div *ngIf="f.contactNumber.errors.maxlength">Contact Number should have
+                                                maximum 10 numbers</div>
+                                            <div *ngIf="f.contactNumber.errors.pattern">Only number is accepted</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col">
+                                    <div class="form-group">
+                                        <label class="display-block">Status<span class="text-danger">*</span></label>
+                                        <div *ngIf="" class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" formControlName="active"
+                                                id="active" value="true">
+                                            <label class="form-check-label" for="active">
+                                                Active
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" formControlName="active"
+                                                id="inactive" value="false">
+                                            <label class="form-check-label" for="inactive">
+                                                Inactive
+                                            </label>
+                                        </div>
+                                        <div *ngIf="f.active.errors" class="help-block">
+                                            <div *ngIf="f.active.errors.required">Status is required</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                       <label>Specialization<span class="text-danger">*</span></label>
+                                       <select class="form-control" formControlName="departmentName"
+                                           [ngClass]="{'is-invalid': isSubmitted && f.departmentName.errors }">
+                                           <option selected>Choose a Department</option>
+                                           <option *ngFor="let dept of depts"
+                                           [selected]="(dept == f.departmentName.value) ? true : false"
+                                           >{{dept}}</option>
+                                       </select>
+                                       <div *ngIf=" isSubmitted && f.departmentName.errors" class="invalid-feedback">
+                                           <div *ngIf="f.departmentName.errors.required">Specialisation is required</div>
+                                       </div>
+                                   </div>
+                                 </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Consultation Price</label>
+                                        <input type="number" formControlName="consultancyFee" class="form-control"
+                                             />
+                                        <!-- <div *ngIf=" isSubmitted && f.contactNumber.errors" class="invalid-feedback">
+                                            <div *ngIf="f.contactNumber.errors.required">Contact Number is required
+                                            </div>
+                                            <div *ngIf="f.contactNumber.errors.minlength">Contact Number should have
+                                                minimun 10 numbers</div>
+                                            <div *ngIf="f.contactNumber.errors.maxlength">Contact Number should have
+                                                maximum 10 numbers</div>
+                                            <div *ngIf="f.contactNumber.errors.pattern">Only number is accepted</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                
+                            </div>
+                               <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <img src= "{{getData.profile_picture}}"   id="image" class="image-display-category" alt="Select Image First" />
+                                            <button type="button" class="btn btn-primary btn-sm" (click)="imgFileInput.click()">Update Image</button>
+                                            <input name="catImage"  hidden required type="file" #imgFileInput id="cat_image" (change)="convertCatImageBase64($event)"/><br/>
+                                           <!--  <div *ngIf="form.submitted && catImage.invalid" >
+                                               <div class="red-text" *ngIf="catImage.errors.required">Banner Image is required</div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div id="hide_div" class="row hidden">
+                                             <div class="col-md-12">
+                                                <image-cropper
+                                                [imageChangedEvent]="imageChangedEvent"
+                                                [maintainAspectRatio]="true"
+                                                [aspectRatio]="4 / 2"
+                                                format="png"
+                                                (imageCropped)="imageCropped($event)"
+                                                (imageLoaded)="imageLoaded()"
+                                                (cropperReady)="cropperReady()"
+                                                (loadImageFailed)="loadImageFailed()"
+                                                ></image-cropper>
+                                             </div>
+                                             <div class="col-md-12">
+                                                <button type="button" class="btn btn-primary btn-sm" md-button (click)="getFileObjetc()">Crop Image</button>
+                                             </div>
+                                          </div>
+                                    </div>  
+                                 </div>                  
+                 <div class="row text-right m-t-20">
+                  <div class="col-lg-10 ">
+                     &nbsp;
+                  </div>
+                  <div class="col-lg-1">
+                    <button type="submit" class="btn cncel-btns-bottoms" routerLink="/master/doctor">Cacnel</button>
+                 </div>
+                  <div class="col-lg-1">
+                     <button class="btn btn-primary submit-btn add-btns-bottoms">Update</button>
+                  </div>
+               </div>
+                         
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

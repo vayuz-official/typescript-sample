@@ -1,0 +1,305 @@
+<div class="main-wrapper">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4 class="page-title">Add {{getData?.roomName}} Room Time Slot</h4>
+                </div>
+                  <div class="col-sm-6 text-right m-b-20">
+                     <a   routerLink="/master/room" class="btn btn btn-primary btn-rounded float-right add-btns-top">
+                            Back</a>
+               
+                   </div>
+            </div>
+            <div class="table-responsive">
+
+                <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Monday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of allTimeSlot">
+                           <td>Monday</td>
+                            <td>{{d.start_time}}</td> 
+                            <td>{{d.end_time}} </td>
+                            <td>
+                              <span class="checked" *ngIf="checkAlredySubmittedMonday(d._id)">
+                                          <input checked class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeMonday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        <span class="not-checked" *ngIf="!checkAlredySubmittedMonday(d._id)">
+                                            <input  class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeMonday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                 </span>
+                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                             <td>
+                               <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="submitSlot('Monday')" >Submit</button>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+
+                <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Tuesday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of allTimeSlot">
+                           <td>Tuesday</td>
+                            <td>{{d.start_time}}</td> 
+                            <td>{{d.end_time}} </td>
+                            <td>
+                              <span class="checked" *ngIf="checkAlredySubmittedTuesday(d._id)">
+                                           <input checked class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeTuesday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        <span class="not-checked" *ngIf="!checkAlredySubmittedTuesday(d._id)">
+                                            <input class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeTuesday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                               </span>
+                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="submitSlot('Tuesday')" >Submit</button>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+
+                <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Wednesday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of allTimeSlot">
+                           <td>Wednesday</td>
+                            <td>{{d.start_time}}</td> 
+                            <td>{{d.end_time}} </td>
+                            <td>
+                              <span class="checked" *ngIf="checkAlredySubmittedWednesday(d._id)">
+                                            <input checked class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeWednesday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        <span class="not-checked" *ngIf="!checkAlredySubmittedWednesday(d._id)">
+                                             <input class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeWednesday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                              </span>
+                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="submitSlot('Wednesday')" >Submit</button>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+
+                <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Thursday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of allTimeSlot">
+                           <td>Thursday</td>
+                            <td>{{d.start_time}}</td> 
+                            <td>{{d.end_time}} </td>
+                            <td>
+                            <span class="checked" *ngIf="checkAlredySubmittedThursday(d._id)">
+                                             <input checked class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeThursday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        <span class="not-checked" *ngIf="!checkAlredySubmittedThursday(d._id)">
+                                             <input class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeThursday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        
+                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="submitSlot('Thursday')" >Submit</button>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <div class="table-responsive">
+
+                <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Friday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of allTimeSlot">
+                           <td>Friday</td>
+                            <td>{{d.start_time}}</td> 
+                            <td>{{d.end_time}} </td>
+                            <td>
+                            <span class="checked" *ngIf="checkAlredySubmittedFriday(d._id)">
+                                             <input checked class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeFriday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        <span class="not-checked" *ngIf="!checkAlredySubmittedFriday(d._id)">
+                                             <input class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeFriday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        
+                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="submitSlot('Friday')" >Submit</button>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+
+                <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Saturday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of allTimeSlot">
+                           <td>Saturday</td>
+                            <td>{{d.start_time}}</td> 
+                            <td>{{d.end_time}} </td>
+                            <td>
+                          <span class="checked" *ngIf="checkAlredySubmittedSaturday(d._id)">
+                                              <input checked="" class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeSaturday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        <span class="not-checked" *ngIf="!checkAlredySubmittedSaturday(d._id)">
+                                              <input class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeSaturday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        
+                                        
+                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                             <td>
+                                 <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="submitSlot('Saturday')" >Submit</button>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <div class="table-responsive">
+
+                <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Sunday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of allTimeSlot">
+                           <td>Sunday</td>
+                            <td>{{d.start_time}}</td> 
+                            <td>{{d.end_time}} </td>
+                            <td>
+                         <span class="checked" *ngIf="checkAlredySubmittedSunday(d._id)">
+                                              <input checked class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeSunday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        <span class="not-checked" *ngIf="!checkAlredySubmittedSunday(d._id)">
+                                              <input class="form-check-input" [value]="d._id"
+                                            (change)="onCheckChangeSunday($event,d._id)" type="checkbox" id="{{d._id}}" >
+                                        </span>
+                                        
+                                        
+                                       
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                             <td>
+                                 <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="submitSlot('Sunday')" >Submit</button>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           
+            </div>
+    </div>
+</div>

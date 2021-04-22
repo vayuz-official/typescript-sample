@@ -1,0 +1,421 @@
+<div class="main-wrapper">
+   <style>
+      .profile-wrapper {
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 5%;
+      }
+      .user-photo {
+      border-radius: 10px;
+      width: auto;
+      height: auto;
+      box-shadow: 0 0 1px 2px rgba(75, 62, 115, .1);
+      }
+      .left {
+      width: 350px;
+      padding: 0;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 0px 47px -4px rgba(75, 62, 115, 1);
+      -moz-box-shadow: 0px 0px 47px -4px rgba(75, 62, 115, 1);
+      box-shadow: 0px 0px 47px -4px rgba(75, 62, 115, 1);
+      }
+      div.links a {
+      color: #8e8e8e;
+      transition: color 0.3s;
+      }
+      div.links a:hover {
+      color: #343a40;
+      transition: color 0.3s;
+      }
+      div.links a:active {
+      color: #6c757d;
+      }
+      .color-green-title {
+      color: #0ac03c;
+      font-weight: 600px !important;
+      }
+      .right {
+      border-left: solid 1px rgba(75, 62, 115, .4);
+      height: auto;
+      margin-top: 20px;
+      -webkit-box-shadow: 0px 0px 47px -4px rgba(75, 62, 115, 1);
+      -moz-box-shadow: 0px 0px 47px -4px rgba(75, 62, 115, 1);
+      box-shadow: 0px 0px 47px -4px rgba(75, 62, 115, 1);
+      background-color: #fff;
+      width: 350px;
+      padding: 0;
+      border-radius: 0 10px 10px 0;
+      padding: 10px 10px 10px 10px;
+      }
+      .right>h1 {
+      font-size: 2em !important;
+      font-weight: 300px !important;
+      margin-bottom: 20px !important
+      }
+      .right>h2 {
+      font-size: 1.2em !important;
+      font-weight: 300px !important;
+      }
+      .right>h3 {
+      font-size: 1em !important;
+      font-weight: 300px !important;
+      }
+      .phone>h2 {
+      font-size: 1.5em !important;
+      }
+      .phone>h3 {
+      font-size: 1em !important;
+      }
+      .phone>h2 a {
+      color: #000;
+      transition: color .2s ease-out .2s;
+      }
+      .phone>h2 a:hover {
+      color: rgba(75, 62, 115, 1);
+      text-decoration: none;
+      transition: color .2s ease-out .2s;
+      }
+      @media (max-width: 767.98px) {
+      .user-photo {
+      box-shadow: none;
+      }
+      .right {
+      border-radius: 0 0 10px 10px;
+      padding-top: 15px;
+      margin-top: -10px;
+      }
+      .profile-wrapper {
+      max-width: 350px;
+      }
+      }
+      .text-format-capta {
+      text-transform: capitalize !important;
+      }
+      .text-one {
+      font-size: 1.5rem !important;
+      margin-bottom: 10px !important;
+      margin-top: 10px !important;
+      }
+      .text-two {
+      font-size: .8rem !important;
+      font-weight: 500px !important;
+      margin-bottom: 10px !important;
+      }
+   </style>
+   <app-header></app-header>
+   <app-sidebar></app-sidebar>
+   <div class="page-wrapper">
+      <div class="content">
+         <!-- <div class="row">
+            <div class="col-sm-6 col-3">
+               <h4 class="page-title">Doctor Data</h4>
+            </div>
+            </div> -->
+         <div *ngIf="undefined === getData">Loading...</div>
+         <div class="row" *ngIf="undefined !== getData">
+            <div class="col-md-9">
+               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link active " id="pills-Booking-tab" data-toggle="pill" href="#pills-Booking"
+                        role="tab" aria-controls="pills-Booking" aria-selected="true">Doctor Details</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link" id="pills-Case-tab" data-toggle="pill" href="#pills-Case"
+                        role="tab" aria-controls="pills-Case" aria-selected="false">Appointments</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link" id="pills-Dashboard-tab" data-toggle="pill" href="#pills-Dashboard" role="tab"
+                        aria-controls="pills-Dashboard" aria-selected="false">Dashboard</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link" id="pills-Rating-tab" data-toggle="pill" href="#pills-Rating" role="tab"
+                        aria-controls="pills-Rating" aria-selected="false">Rating</a>
+                  </li>
+               </ul>
+            </div>
+            <div class="col-md-3 text-right">
+                <button  class="btn cncel-btns-bottoms"
+                           routerLink="/master/doctor">
+                           <i _ngcontent-klv-c104="" class="fa fa-long-arrow-left"></i>
+                            Back</button>
+               <!-- <button _ngcontent-klv-c104="" type="submit" routerlink="/master/staff" class="btn cncel-btns-bottoms" tabindex="0" ng-reflect-router-link="/master/staff"><i _ngcontent-klv-c104="" class="fa fa-long-arrow-left"></i> Back</button> -->
+            </div>  
+         </div>
+         <div>
+            <div class="tab-content width-100" id="pills-tabContent">
+               <div class="tab-pane fade show active" id="pills-Booking" role="tabpanel"
+                  aria-labelledby="pills-Booking-tab">
+                  <div *ngIf="undefined !== getData">
+                     <div class="card-box profile-header width-100">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="profile-view">
+                                 <div class="profile-img-wrap">
+                                    <div class="profile-img">
+                                       <a href="#"><img class="avatar" src="assets/doctors.png" alt=""></a>
+                                    </div>
+                                 </div>
+                                 <div class="profile-basic">
+                                    <div class="row">
+                                       <div class="col-md-5">
+                                          <div class="profile-info-left">
+                                             <h3 itemprop="name" class="user-name m-t-0 mb-0"> {{getData.doctorName}}</h3>
+                                             <div class="staff-id">Doctor ID : {{getData._id}}</div>
+                                             <div class="staff-msg"><a class=" btn add-btns-bottoms" *ngIf="getData.is_active == true" >Active</a></div>
+                                             <div class="staff-msg"><a class=" btn add-btns-bottoms btn-danger" *ngIf="getData.is_active == false" >InActive</a></div>
+                                             <div class="staff-msg"><a class=" btn add-btns-bottoms btn-danger" *ngIf="getData.is_active == false&&delete_description!=null&&delete_description!=undefined" >Deleted</a></div>
+
+                                          </div>
+
+
+                                          <div class="profile-info-left">
+                                            <div class="staff-msg"><a  class="btn add-btns-bottoms" *ngIf="getData.promoted" >Promoted</a></div>
+                                            <div class="staff-msg"><a  class="btn add-btns-bottoms" *ngIf="!getData.promoted" (click)="promote(getData._id)"  >Promote</a></div>
+
+                                          </div>
+                                           
+
+
+
+                                       </div>
+                                       <div class="col-md-7">
+                                          <ul class="personal-info">
+                                             <li>
+                                                <span class="title">Email:</span>
+                                                <span class="text"><a href="">{{getData.email}}</a></span>
+                                             </li>
+                                             <li>
+                                                <span class="title">Specilization:</span>
+                                                <span class="text">{{getData.specialization}} @ {{getData.city}}, {{getData.state}}</span>
+                                             </li>
+                                             <li>
+                                                <span class="title">Contact No. :</span>
+                                                <span class="text">{{getData.contactNumber}}</span>
+                                             </li>
+                                             <li>
+                                                <span class="title">Status:</span>
+                                                <span class="text">{{getData.is_active}}</span>
+                                             </li>
+                                             <li>
+                                                <span class="title">Average Rating:</span>
+                                                <span class="text">{{avgRating}}</span>
+                                             </li>
+                                             <li>
+                                                <span class="title">Created on:</span>
+                                                <span class="text">{{getData.createdAt | date:'medium'}}</span>
+                                             </li>
+                                             <li>
+                                                <span class="title">Updated on:</span>
+                                                <span class="text">{{getData.updatedAt | date:'medium'}}</span>
+                                             </li>
+                                             <li>
+                                                <span class="title">Cancelled Appointments:</span>
+                                                <span class="text">{{cancelAppointement}}</span>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- old code -->
+                     <!-- <div class="profile-wrapper container">
+                        <div class="row">
+                           <div class="col-md-6 left">
+                              <img class="user-photo" itemprop="image"
+                                 src="https://th.bing.com/th/id/OIP.zFkPRn9CfiKrxR6bM0dj1QHaF_?pid=Api&rs=1?size=350"
+                                 alt="Kirill Krasin">
+                           </div>
+                           <div class="col-md-6 right text-left">
+                              <div *ngIf="undefined === getData">Loading...</div>
+                              <div *ngIf="undefined !== getData">
+                                 <h1 itemprop="name" class="text-one text-format-capta"><strong>
+                                       {{getData.doctorName}}</strong></h1>
+                                 <h2 class="text-two">{{getData._id}}</h2>
+                                 <h2 class="text-two">{{getData.email}}</h2>
+                                 <h2 class=" text-two">{{getData.specialization}} @ {{getData.city}},
+                                    {{getData.state}}</h2>
+                                 <h2 class="text-two">{{getData.contactNumber}}</h2>
+                                 <h2 class="text-two">{{getData.is_active}}</h2>
+                                 <h2 class="text-two"><strong>Average Rating :</strong> {{avgRating}}</h2>
+                                 <h2 class="text-two"><strong>Created On :</strong>
+                                    {{getData.createdAt | date:'medium'}}</h2>
+                                 <h2 class="text-two"><strong>Updated On :</strong>
+                                    {{getData.updatedAt | date:'medium'}}</h2>
+                                 <h2 class="text-two"><strong>Cancelled Appointments :</strong>
+                                    {{cancelAppointement}}</h2>
+                                 <hr>
+                              </div>
+                              <div class="phone text-center">
+                                 <button type="submit" class="btn cncel-btns-bottoms" routerLink="/master/doctor"><i
+                                       class="fa fa-long-arrow-left"></i> Back</button>
+                              </div>
+                           </div>
+                        </div>
+                        </div> -->
+                  </div>
+                  <div class="row text-right m-t-20">
+                     <div class="col-lg-10">
+                        &nbsp;
+                     </div>
+                     <div class="col-lg-1">
+                       <!--  <button type="submit" class="btn cncel-btns-bottoms"
+                           routerLink="/master/doctor"> <i _ngcontent-klv-c104="" class="fa fa-long-arrow-left"></i>Back</button> -->
+                     </div>
+                     <div class="col-lg-1" *ngIf="getData?.is_approved === false">
+                        <button type="submit" class="btn add-btns-bottoms" (click)="getApproved()">Approve</button>
+                     </div>
+                     <div class="col-lg-1">
+                        <button type="submit" class="btn cncl-color-red" (click)="getRejected()">Reject</button>
+                     </div>
+                  </div>
+               </div>
+               <div class="tab-pane fade" id="pills-Case" role="tabpanel" aria-labelledby="pills-Case-tab">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div *ngIf="undefined !== appointments">
+                           <div class="table-responsive">
+                              <table class="table table-border table-striped custom-table datatable mb-0">
+                                 <thead>
+                                    <tr>
+                                       <th>S. No.</th>
+                                       <th>Appointement Id</th>
+                                       <th>Patiend Id</th>
+                                       <th>Department</th>
+                                       <th>Appointment Date</th>
+                                       <th>Time</th>
+                                       <th>Problem</th>
+                                       <th>Type</th>
+                                       <th>Payment Status</th>
+                                       <th>Status</th>
+                                       <th>Cancelled By</th>
+                                       <!-- <th class="text-right">Action</th> -->
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr *ngFor="let getOne of appointments; let i = index">
+                                       <td>{{i+1}}</td>
+                                       <td>{{getOne.patient_id}}</td>
+                                       <td>{{getOne.patient_id}}</td>
+                                       <td>{{getOne.departmentname}}</td>
+                                       <td>{{getOne.date | date:'mediumDate'}}</td>
+                                       <td>{{getOne.date | date: 'shortTime'}}</td>
+                                       <td>{{getOne.problem}}</td>
+                                       <td>{{getOne.mode_of_payment}}</td>
+                                       <td>
+                                          <span *ngIf="getOne.payment_status == true" class="custom-badge status-green" style="cursor: pointer;"
+                                          (click)="confirmPending(getOne)"
+                                          >Done</span>
+                                          <span  *ngIf="getOne.payment_status == false" class="custom-badge status-red" style="cursor: pointer;"
+                                          data-toggle="modal" data-target="#due" (click)="selectElement(getOne)"
+                                         >Pending</span>
+                                       </td>
+                                       <td>
+                                          <span class="custom-badge status-green"
+                                             *ngIf="getOne.status == 'active'">Active</span>
+                                          <span class="custom-badge status-green"
+                                             *ngIf="getOne.status == 'pending'">Pending</span>
+                                          <span class="custom-badge status-red"
+                                             *ngIf="getOne.status == 'inactive' ||getOne.status=='cancelled'">Cancelled</span>
+                                            
+                                       </td>
+                                       <td>
+                                          <span *ngIf="getOne.cancelledBy"> {{getOne.cancelledBy}}</span>
+                                       </td>
+                                       <!-- <td class="text-right">
+                                          <div class="dropdown dropdown-action">
+                                              <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
+                                                  aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                              <div class="dropdown-menu dropdown-menu-right">
+                                          
+                                                  <a class="dropdown-item" (click)="viewDetails(getOne._id)"
+                                                      routerLinkActive="active"><i class="fa fa-eye"></i>View Appointment</a>
+                                                  <a class="dropdown-item" [routerLink]="['/doctor/prescription/view-prescription/',getOne._id]"
+                                                      routerLinkActive="active"><i class="fa fa-eye"></i>View Prescription</a>
+                                                  <a class="dropdown-item" href="#" 
+                                                      routerLinkActive="active"><i class="fa fa-pencil m-r-5"></i>
+                                                      Change Status</a>
+                                                 
+                                              </div>
+                                          </div>
+                                          </td> -->
+                                    </tr>
+                                 </tbody>
+                              </table>
+                             <!--  <div class="col-lg-12 mt-5 text-right">
+                                 <button type="submit" class="btn cncel-btns-bottoms" routerLink="/master/doctor"><i
+                                    class="fa fa-long-arrow-left"></i> Back</button>
+                              </div> -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="tab-pane fade " id="pills-Dashboard" role="tabpanel"
+                  aria-labelledby="pills-Dashboard-tab">
+                  <div class="row">
+                     <div class="col-sm-6 col-3">
+                        <h4 class="page-title">Cancelled Appointment Details</h4>
+                     </div>
+                  </div>
+                  <div *ngIf="undefined !== totalCancel" class="row">
+                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="dash-widget">
+                           <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                           <div class="dash-widget-info text-right">
+                              <h3>{{totalCancel}}</h3>
+                              <span class="widget-title2">Total <i class="fa fa-check" aria-hidden="true"></i></span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="dash-widget">
+                           <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                           <div class="dash-widget-info text-right">
+                              <h3>{{adminCancel}}</h3>
+                              <span class="widget-title2">By Admin<i class="fa fa-check"
+                                 aria-hidden="true"></i></span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="dash-widget">
+                           <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                           <div class="dash-widget-info text-right">
+                              <h3>{{patientCancel}}</h3>
+                              <span class="widget-title2"> By Patient<i class="fa fa-check"
+                                 aria-hidden="true"></i></span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="tab-pane fade " id="pills-Rating" role="tabpanel"
+                  aria-labelledby="pills-Rating-tab">
+                  <!-- <div class="row">
+                     <div class="col-sm-6 col-3">
+                        <h4 class="page-title"></h4>
+                     </div>
+                     </div> -->
+                  <div *ngIf="undefined !== getRatings" class="row">
+                     <div class="col-md-6 col-sm-12 col-lg-4 col-xl-3" *ngFor="let rating of getRatings">
+                        <div class="card">
+                           <div class="card-body">
+                              <div >
+                                 <h5 class="card-title" >Review</h5>
+                                 <p class="card-text" > Rating: {{rating.rating}}</p>
+                                 <p class="card-text"  >Review By: {{rating.userId.patient_name}}</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

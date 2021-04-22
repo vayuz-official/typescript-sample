@@ -1,0 +1,128 @@
+<div class="main-wrapper">
+        
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+
+    <div class="page-wrapper">
+         <div class="profile-wrapper container">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="row ">
+                        <div class="col-sm-4 col-3">
+                            <h4 class="page-title">Room Data</h4>
+                        </div>
+                        <div class="col-sm-8 col-9 text-right m-b-20">
+                            <button type="submit" class="btn cncel-btns-bottoms" routerLink="/master/room"><i class="fa fa-long-arrow-left"></i> Back</button>
+                        </div>
+                    </div>
+                    <div class="row ml-0">
+                       <div class="card-box profile-header width-100">
+                          <div class="profile-view row">
+                             <div class="col-4">
+                                <div class="">
+                                   <div class="">
+                                       <img class="banner-img" src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="col-8">
+                                <div class="profile-basic ml-0">
+                                   <div class="row">
+                                       <div class="col-md-12">
+                                           <div class="">
+                                               <h3 itemprop="name" class="user-name m-t-0 mb-0">{{getData?.clinicData.clinicName}}</h3>
+                                               <div class="">
+                                                  <b>Clinic ID:</b> {{getData?._id | uppercase}}
+                                               </div>
+                                               <div class="staff-id"><b>Address:</b> {{getData?.clinicData.state}}</div>
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Created on:</b></span>
+                                                  <span class="text">{{getData?.createdAt | date:'medium'}}</span>
+                                               </div>
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Doctor Name:</b></span>
+                                                  <span class="text">{{getData?.getDoctorName}}</span>
+                                               </div>
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Room No.:</b></span>
+                                                  <span class="text">{{getData?.roomNumber}}</span>
+                                               </div> 
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Room Name.:</b></span>
+                                                  <span class="text">{{getData?.roomName}}</span>
+                                               </div>
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Rent per month:</b></span>
+                                                  <span class="text">{{getData?.rentPerMonth}}</span>
+                                               </div>
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Paid Status.:</b></span>
+                                                  <span class="text">{{getData?.paidStatus}}</span>
+                                               </div>
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Paid On.:</b></span>
+                                                  <span class="text">{{getData?.paidOn | date:'medium'}}</span>
+                                               </div>
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Created on:</b></span>
+                                                  <span class="text"> {{getData?.createdAt | date:'medium'}}</span>
+                                               </div>
+                                               <div class="staff-id">
+                                                  <span class="title"><b>Updated on:</b></span>
+                                                  <span class="text"> {{getData?.updatedAt | date:'medium'}}</span>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                             </div>  
+                          </div>  
+                       </div>        
+                    </div>
+                </div>
+                <!-- old code -->
+               <!-- <div class="col-md-12 ">
+                  <h2 class="page-title color-green-title " style="font-weight: 600px !important;">Room Data</h2>
+                  <div *ngIf="undefined === getData">Loading...</div>
+                  <div *ngIf="undefined !== getData">
+                     <h1 itemprop="name" class="text-one text-format-capta"><strong> {{getData.clinicData.clinicName}}</strong></h1>
+                     <h2 class="text-two">{{getData._id}}</h2>
+                     <h2 class="text-two">{{getData.clinicData.state}}</h2>
+                     <h2 class=" text-two">{{getData.getDoctorName}}</h2>
+                     <h2 class="text-two">{{getData.roomNumber}}</h2>
+                     <h2 class="text-two">{{getData.rentPerMonth}}</h2>
+                        <h2 class="text-two">{{getData.paidStatus}}</h2>
+                         <h2 class="text-two">Paid On : {{getData.paidOn | date:'medium'}}</h2>
+                     <h2 class="text-two"><strong>Created On :</strong> {{getData.createdAt | date:'medium'}}</h2>
+                     <h2 class="text-two"><strong>Updated On :</strong> {{getData.updatedAt | date:'medium'}}</h2>
+                     <hr>
+                  </div>
+                  <div class="phone text-center">
+                     
+                  </div>
+               </div> -->
+            </div>
+         </div>
+        <!-- <h2> Data</h2>
+        <div *ngIf="undefined === getData">Loading...</div>
+        <div *ngIf="undefined !== getData">
+        <ul>
+            <li>ID : {{getData._id}}</li>
+            <li>Clinic Name : {{getData.clinicData.clinicName}}</li>
+            <li>State : {{getData.clinicData.state}}</li>
+            <li>Doctor Name : {{getDoctorName}}</li>
+            <li>Room Number : {{getData.roomNumber}}</li>
+            <li></li>
+            <li>Paid Status : {{getData.paidStatus}}</li>
+            <li></li>
+            <li>Created On : {{getData.createdAt | date:'medium'}}</li>
+            <li>Updated On : {{getData.updatedAt | date:'medium'}}</li>
+        </ul>
+        </div>
+        <div class="col-lg-1 mt-5">
+            <button type="submit" class="btn cncel-btns-bottoms" routerLink="/master/room">Back</button>
+         </div> -->
+    </div>
+</div>
+
+

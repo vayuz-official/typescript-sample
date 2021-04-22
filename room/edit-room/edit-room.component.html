@@ -1,0 +1,213 @@
+<div class="main-wrapper">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <div class="page-wrapper">
+
+        <div class="content">
+            <div class="spinner-border text-primary" role="status" *ngIf="undefined === getData">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div *ngIf="undefined !== getData">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <h4 class="page-title">Edit Room</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <!-- <p *ngIf="message" class="text-center error">{{message}}</p> -->
+                        <form class="form" [formGroup]="submitForm" >
+                            <div class="row">
+                                <div class="col">
+                                    <label>Floor</label>
+                                    <select class="form-control" formControlName="floor"
+                                        [ngClass]="{ 'is-invalid input-margin': isSubmitted && f.floor.errors }">
+                                        <option selected>Choose a Floor</option>
+                                        <option value="{{getData[0].roomId.floor}}" *ngFor="let floor of floors">{{floor}}</option>
+                                    </select>
+                                     <div *ngIf=" isSubmitted && f.floor.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.floor.errors.required">Floor
+                                                         is
+                                                        required</div>
+                                                       <!--  <div *ngIf="f.floor.errors.pattern">Only alphabets is accepted</div> -->
+                                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label class="">Room Name</label>
+                                    <input type="text" class="form-control" formControlName="roomName"
+                                        [ngClass]="{ 'is-invalid input-margin': isSubmitted && f.roomName.errors }"  />
+                                   <div *ngIf="isSubmitted && f.roomName.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.roomName.errors.required">Room name is
+                                                            required
+                                                        </div>
+                                                        <div *ngIf="f.roomName.errors.pattern">Special characters are
+                                                            not allowed</div>
+                                                            <div *ngIf="f.roomName.hasError('whitespace')">Space not allowed</div>
+                                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Room Number<span class="text-danger">*</span></label>
+                                        <input class="form-control" type="number"
+                                            formControlName="roomNumber" min="0" [ngClass]="{ 'is-invalid input-margin': isSubmitted && f.roomNumber.errors }" >
+                                        <div *ngIf="isSubmitted && f.roomNumber.errors" class="invalid-feedback">
+                                                                <div *ngIf="f.roomNumber.errors.required">Room Number is required</div>
+                                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Specialization<span class="text-danger">*</span></label>
+                                        <select class="form-control" formControlName="specialization"
+                                             [ngClass]="{ 'is-invalid input-margin': isSubmitted && f.specialization.errors }">
+                                            <option selected>Choose a Department</option>
+                                            <option value="{{getData[0].roomId.specialization}}" *ngFor="let dept of depts">{{dept}}</option>
+                                        </select>
+                                         <div *ngIf=" isSubmitted && f.specialization.errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="f.specialization.errors.required">Specialisation
+                                                                 is required</div>
+                                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Room StartTime<span class="text-danger">*</span></label>
+                                        <input class="form-control" type="time"
+                                            formControlName="startTime"[ngClass]="{ 'is-invalid input-margin': isSubmitted && f.startTime.errors }">
+                                        <div *ngIf="f.startTime.errors" class="invalid-feedback">
+                                          <div *ngIf="f.startTime.errors.required">Room Start Time is required</div>
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Room EndTime<span class="text-danger">*</span></label>
+                                        <input class="form-control" type="time"
+                                            formControlName="endTime"  [ngClass]="{ 'is-invalid input-margin': isSubmitted && f.endTime.errors }">
+                                        <div *ngIf="f.endTime.errors" class="invalid-feedback">
+                                          <div *ngIf="f.endTime.errors.required">Room End Time is required</div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Rent Per Hour</label>
+                                        <input class="form-control" type="number" formControlName="rentPerMonth" min="0"
+                                       
+                                        [ngClass]="{ 'is-invalid input-margin': isSubmitted && f.rentPerMonth.errors }">
+                                        <div *ngIf="f.rentPerMonth.errors && isSubmitted" class="invalid-feedback">
+                                          <div *ngIf="f.rentPerMonth.errors.required">Rent is required</div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <!-- <div *ngFor="let day of dayz">
+                                        <input type="text" *ngIf="false" (click)="addDays(day)" formControlName="days" />
+                                        <input type="checkbox" (click)="addDays(day)"  />
+                                        <label>{{day}}</label>
+                                    </div> -->
+                                    <!-- <ng-multiselect-dropdown id="addClass"
+                                        [ngClass]="{'is-invalid': isSubmitted && f.branch.errors }"
+                                        [placeholder]="'Select Branch'" style="border-color: #d92550;"
+                                        [data]="dropdownList" formControlName="days"
+                                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown> -->
+                                    <ng-multiselect-dropdown #multiSelect [placeholder]="'select days'"
+                                        [data]="dropdownList" formControlName="days"
+                                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                       [(ngModel)]="selectedItems"
+                                      (onFilterChange)="onFilterChange($event)"
+                                      (onDropDownClose)="onDropDownClose($event)"
+                                      (onDeSelect)="onDeSelect($event)"
+                                      (onDeSelectAll)="onDeSelectAll($event)">
+                                        >
+                                    </ng-multiselect-dropdown>
+
+                                </div>
+                                <!-- <div class="col">
+                                    <div class="form-group">
+                                        <label>Rent Per Hour</label>
+                                        <input class="form-control" type="number" formControlName="rentPerMonth" min="0">
+                                        <div *ngIf="f.rentPerMonth.errors && isSubmitted" class="help-block">
+                                            <div *ngIf="f.rentPerMonth.errors.required">Rent is required</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Room Number<span class="text-danger">*</span></label>
+                                        <input class="form-control" type="number" required autofocus="" min="0" formControlName="roomNumber">
+                                        <div *ngIf="f.roomNumber.errors && isSubmitted" class="help-block">
+                                            <div *ngIf="f.roomNumber.errors.required">Room Number is required</div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Rent Per Month</label>
+                                        <input class="form-control" type="number" min="0" formControlName="rentPerMonth">
+                                        <div *ngIf="f.rentPerMonth.errors && isSubmitted" class="help-block">
+                                            <div *ngIf="f.rentPerMonth.errors.required">Rent is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="display-block">Paid Status<span class="text-danger">*</span></label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" formControlName="paidStatus"
+                                                id="active" value="true">
+                                            <label class="form-check-label" for="active">
+                                                Paid
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" formControlName="paidStatus"
+                                                id="inactive" value="false">
+                                            <label class="form-check-label" for="inactive">
+                                                Unpaid
+                                            </label>
+                                        </div>
+                                        <div *ngIf="f.paidStatus.errors" class="help-block">
+                                            <div *ngIf="f.paidStatus.errors.required">Paid Status is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                          
+ </form>
+<div style="padding-top: 2%;"></div>
+                        
+                        <div class="row">
+                            <div class="col-lg-9">
+                               &nbsp;
+                            </div>
+                            <div class="col-lg-3">
+                               <button class="add-btns-top btn btn btn-primary btn-rounded"  routerLink="/master/room"><i class="fa fa-arrow-left"></i>Back</button>
+                               <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="updateById(id, submitForm.value)" >Update</button>
+                            </div>
+                         </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,349 @@
+<div class="main-wrapper">
+   <app-header></app-header>
+   <app-sidebar></app-sidebar>
+   <div class="page-wrapper">
+      <div class="content">
+         <div class="row">
+            <div class="col-sm-6">
+               <h4 class="page-title">Assign Doctors to Room : {{getData?.roomName}} for clinic {{getClinicData?.clinicName}}</h4>
+            </div>
+            <div class="col-sm-6 text-right m-b-20">
+               <a   routerLink="/master/room" class="btn btn btn-primary btn-rounded float-right add-btns-top">
+               Back</a>
+            </div>
+         </div>
+         <!-- <div class="row">
+            <div class="col-sm-6">
+               <div class="form-group">
+                  <form method="get" action="#" class="search_container">
+                     <input
+                        [formControl]="search_word"
+                        type="text"
+                        placeholder="Type to search doctor..."
+                        >
+                  </form>
+                  <span *ngIf="isLoading">now loading...</span>
+                  <p>search result</p>
+                  <table>
+                     <tr *ngFor="let name of result_list">
+                        <td>{{name}}</td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+            <div class="col-sm-6 text-right m-b-20">
+            </div>
+         </div> -->
+           <div class="table-responsive">
+                <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Monday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Assigned Dr</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of dataMondaySlot; let i = index">
+                           <td>{{d.day}}</td>
+                            <td>{{d.timeSlotData?.start_time}}</td> 
+                            <td>{{d.timeSlotData?.end_time}} </td>
+                            <td>
+                               <span class="checked" *ngIf="d.doctorData">
+                                  {{d.doctorData?.email}}
+                                 </span>
+                                 <span class="not-checked" *ngIf="!d.doctorData">
+                                   ---
+                                 </span>
+                            </td>
+                            <td>
+                                    <ng-multiselect-dropdown [placeholder]="'select doctor'"
+                                    [data]="dropdownList" 
+                                    [settings]="dropdownSettings"  (onSelect)="onItemSelectMonday($event,d._id)"
+                                    >
+                                    </ng-multiselect-dropdown>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="assignDrToRoomSlot()" >Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+           </div>
+
+            <div class="table-responsive">
+                 <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Tuesday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                             <th>Assigned Dr</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of dataTuesdaySlot">
+                           <td>{{d.day}}</td>
+                            <td>{{d.timeSlotData?.start_time}}</td> 
+                            <td>{{d.timeSlotData?.end_time}} </td>
+                              <td>
+                               <span class="checked" *ngIf="d.doctorData">
+                                  {{d.doctorData?.email}}
+                                 </span>
+                                 <span class="not-checked" *ngIf="!d.doctorData">
+                                   ---
+                                 </span>
+                            </td>
+                            <td>
+                               <ng-multiselect-dropdown [placeholder]="'select doctor'"
+                                    [data]="dropdownList" 
+                                    [settings]="dropdownSettings"  (onSelect)="onItemSelectTuesday($event,d._id)"
+                                    >
+                                 </ng-multiselect-dropdown>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="assignDrToRoomSlot()" >Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+             <div class="table-responsive">
+                 <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Wednesday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                             <th>Assigned Dr</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of dataWednesdaySlot">
+                           <td>{{d.day}}</td>
+                            <td>{{d.timeSlotData?.start_time}}</td> 
+                            <td>{{d.timeSlotData?.end_time}} </td>
+                              <td>
+                               <span class="checked" *ngIf="d.doctorData">
+                                  {{d.doctorData?.email}}
+                                 </span>
+                                 <span class="not-checked" *ngIf="!d.doctorData">
+                                   ---
+                                 </span>
+                            </td>
+                            <td>
+                               <ng-multiselect-dropdown [placeholder]="'select doctor'"
+                                    [data]="dropdownList" 
+                                    [settings]="dropdownSettings"  (onSelect)="onItemSelectWednesday($event,d._id)"
+                                    >
+                                 </ng-multiselect-dropdown>
+                               
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="assignDrToRoomSlot()" >Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                 <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Thursday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                             <th>Assigned Dr</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of dataThursdaySlot">
+                           <td>{{d.day}}</td>
+                            <td>{{d.timeSlotData?.start_time}}</td> 
+                            <td>{{d.timeSlotData?.end_time}} </td>
+                              <td>
+                               <span class="checked" *ngIf="d.doctorData">
+                                  {{d.doctorData?.email}}
+                                 </span>
+                                 <span class="not-checked" *ngIf="!d.doctorData">
+                                   ---
+                                 </span>
+                            </td>
+                            <td>
+                               <ng-multiselect-dropdown [placeholder]="'select doctor'"
+                                    [data]="dropdownList" 
+                                    [settings]="dropdownSettings"  (onSelect)="onItemSelectThursday($event,d._id)"
+                                    >
+                                 </ng-multiselect-dropdown>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="assignDrToRoomSlot()" >Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                 <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Friday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                             <th>Assigned Dr</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of dataFridaySlot">
+                           <td>{{d.day}}</td>
+                            <td>{{d.timeSlotData?.start_time}}</td> 
+                            <td>{{d.timeSlotData?.end_time}} </td>
+                              <td>
+                               <span class="checked" *ngIf="d.doctorData">
+                                  {{d.doctorData?.email}}
+                                 </span>
+                                 <span class="not-checked" *ngIf="!d.doctorData">
+                                   ---
+                                 </span>
+                            </td>
+                            <td>
+                               <ng-multiselect-dropdown [placeholder]="'select doctor'"
+                                    [data]="dropdownList" 
+                                    [settings]="dropdownSettings"  (onSelect)="onItemSelectFriday($event,d._id)"
+                                    >
+                                 </ng-multiselect-dropdown>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="assignDrToRoomSlot()" >Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                 <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Saturday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                             <th>Assigned Dr</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of dataSaturdaySlot">
+                           <td>{{d.day}}</td>
+                            <td>{{d.timeSlotData?.start_time}}</td> 
+                            <td>{{d.timeSlotData?.end_time}} </td>
+                              <td>
+                               <span class="checked" *ngIf="d.doctorData">
+                                  {{d.doctorData?.email}}
+                                 </span>
+                                 <span class="not-checked" *ngIf="!d.doctorData">
+                                   ---
+                                 </span>
+                            </td>
+                            <td>
+                                <ng-multiselect-dropdown [placeholder]="'select doctor'"
+                                    [data]="dropdownList" 
+                                    [settings]="dropdownSettings"  (onSelect)="onItemSelectSaturday($event,d._id)"
+                                    >
+                                 </ng-multiselect-dropdown>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="assignDrToRoomSlot()" >Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+            <div class="table-responsive">
+                 <table class="table table-border table-striped custom-table datatable mb-0 row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Sunday</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                             <th>Assigned Dr</th>
+                            <th >Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr *ngFor="let d of dataSundaySlot">
+                           <td>{{d.day}}</td>
+                            <td>{{d.timeSlotData?.start_time}}</td> 
+                            <td>{{d.timeSlotData?.end_time}} </td>
+                              <td>
+                               <span class="checked" *ngIf="d.doctorData">
+                                  {{d.doctorData?.email}}
+                                 </span>
+                                 <span class="not-checked" *ngIf="!d.doctorData">
+                                   ---
+                                 </span>
+                            </td>
+                            <td>
+                                <ng-multiselect-dropdown [placeholder]="'select doctor'"
+                                    [data]="dropdownList" 
+                                    [settings]="dropdownSettings"  (onSelect)="onItemSelectSunday($event,d._id)"
+                                    >
+                                 </ng-multiselect-dropdown>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                             <td>
+                                <button class="btn btn-primary submit-btn add-btns-bottoms" (click)="assignDrToRoomSlot()" >Submit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>                 
+      </div>
+   </div>
+</div>
